@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Авг 30 2022 г., 06:31
+-- Время создания: Авг 31 2022 г., 06:10
 -- Версия сервера: 5.7.36
 -- Версия PHP: 8.1.0
 
@@ -32,7 +32,16 @@ CREATE TABLE IF NOT EXISTS `departments` (
   `id` int(2) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Дамп данных таблицы `departments`
+--
+
+INSERT INTO `departments` (`id`, `name`) VALUES
+(1, 'IT'),
+(2, 'HR'),
+(4, 'SMM');
 
 -- --------------------------------------------------------
 
@@ -43,9 +52,9 @@ CREATE TABLE IF NOT EXISTS `departments` (
 DROP TABLE IF EXISTS `employers`;
 CREATE TABLE IF NOT EXISTS `employers` (
   `id` int(3) NOT NULL AUTO_INCREMENT,
-  `seria` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `seria` (`seria`)
+  `name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `surname` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -73,6 +82,21 @@ CREATE TABLE IF NOT EXISTS `salaries` (
   `employer_id` int(3) NOT NULL,
   `salary` int(4) NOT NULL,
   UNIQUE KEY `employer_id` (`employer_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `users`
+--
+
+DROP TABLE IF EXISTS `users`;
+CREATE TABLE IF NOT EXISTS `users` (
+  `id` int(3) NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `login` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `password` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 COMMIT;
 

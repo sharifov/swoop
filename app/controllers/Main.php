@@ -7,22 +7,28 @@ class Main extends Controller {
 	{
 		$this->model('employer');
 
-        if ($this->isPost() && isset($_POST['send'])) {
+        if ($this->isPost() && isset($_POST['auth'])) {
 
-            $_POST['fio'] = $this->clear($_POST['fio']);
-            $_POST['email'] = $this->clear($_POST['email']);
+            $_POST['login'] = $this->clear($_POST['login']);
+            $_POST['password'] = $this->clear($_POST['password']);
 
-			$this->model->insert([
-				'news_id' => $_POST['news_id'],
-				'cat_id' => $_POST['cat_id']
-			]);
-
-            $this->redirect('', 'Новость успешно добавлен к рубрике!');
+            Auth::login($_POST['login'], $_POST['password']);
+            
+            $this->redirect('', 'Вы успешно авторизовались!');
         }
 
         //$count = count($this->model->findAll());
 
         // Исполнение Вида - Главной странице
-        $this->view->render('index', compact(''));
+        $this->view->render(Auth::has() ? 'index' : 'auth');
+	}
+
+	public function departments(): void
+	{
+		$this->model('department');
+		
+		$departments = $this->model->findAll();
+
+		$this->view->render('departments', compact('departments'));
 	}
 }
